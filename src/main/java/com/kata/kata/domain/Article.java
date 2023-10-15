@@ -25,8 +25,8 @@ public class Article {
     @Column(name = "reporter", nullable = false)
     private String reporter;
 
-    @Column(name = "media", nullable = false)
-    private String media;
+    @Column(name = "press", nullable = false)
+    private String press;
 
     @Column(name = "link", nullable = false)
     private String link;
@@ -39,7 +39,7 @@ public class Article {
             String title,
             String body,
             String reporter,
-            String media,
+            String press,
             String link,
             LocalDateTime time
     ) {
@@ -47,7 +47,7 @@ public class Article {
         this.title = title;
         this.body = body;
         this.reporter = reporter;
-        this.media = media;
+        this.press = press;
         this.link = link;
         this.time = time;
     }
@@ -56,10 +56,10 @@ public class Article {
             String title,
             String body,
             String reporter,
-            String media,
+            String press,
             String link,
             LocalDateTime time
     ) {
-        this(null, title, body, reporter, media, link, time);
+        this(null, title, body, reporter, press, link, time);
     }
 }
