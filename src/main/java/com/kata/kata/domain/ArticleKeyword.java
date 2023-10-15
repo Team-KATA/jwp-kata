@@ -22,4 +22,21 @@ public class ArticleKeyword {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "keyword_id", nullable = false)
     private Keyword keyword;
+
+    public ArticleKeyword(
+            Long id,
+            Article article,
+            Keyword keyword
+    ) {
+        this.id = id;
+        this.article = article;
+        this.keyword = keyword;
+    }
+
+    public ArticleKeyword(
+            Article article,
+            Keyword keyword
+    ) {
+        this(null, article, keyword);
+    }
 }
