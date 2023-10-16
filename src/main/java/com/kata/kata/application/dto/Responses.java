@@ -8,18 +8,17 @@ import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Response<T> {
+public class Responses<T> {
 
+    private List<T> data;
 
-    private T data;
-
-    public Response(
-            T data
-    ) {
+    public Responses(
+            List<T> data
+            ) {
         this.data = data;
     }
 
-    public static <T> Response<T> of(T data) {
-        return new Response<>(data);
+    public static <T> Responses<T> of(List<T> data) {
+        return new Responses<>(data);
     }
 }

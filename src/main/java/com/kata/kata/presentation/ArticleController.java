@@ -1,7 +1,9 @@
 package com.kata.kata.presentation;
 
-import com.kata.kata.application.KeywordService;
+import com.kata.kata.application.ArticleService;
 import com.kata.kata.application.dto.ArticleKeywordResponse;
+import com.kata.kata.application.dto.ArticleResponse;
+import com.kata.kata.application.dto.Response;
 import com.kata.kata.application.dto.Responses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/keywords")
-public class KeywordController {
+@RequestMapping("/api/articles")
+public class ArticleController {
 
-    private final KeywordService keywordService;
+    private final ArticleService articleService;
 
-    @GetMapping("/{keywordId}/articles")
-    public ResponseEntity<Responses<ArticleKeywordResponse>> findArticlesByKeyword(@PathVariable("keywordId") Long id) {
-        return ResponseEntity.ok(Responses.of(keywordService.findArticleKeywords(id)));
+    @GetMapping("/{articleId}")
+    public ResponseEntity<Response<ArticleResponse>> findArticle(@PathVariable("articleId") Long id) {
+        return ResponseEntity.ok(Response.of(articleService.findArticle(id)));
     }
 }
