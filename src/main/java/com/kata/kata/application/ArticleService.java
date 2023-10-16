@@ -30,4 +30,14 @@ public class ArticleService {
                 .collect(Collectors.toList());
         return ArticleResponse.of(articleSummaryRepository.findByArticle(article), sentiments);
     }
+
+    public List<ArticleResponse> findAllArticle() {
+        List<Article> articles = articleRepository.findAll();
+        return articles.stream()
+                .map(it -> ArticleResponse.of(articleSummaryRepository.findByArticle(it), articleSentimentRepository.findAllByArticle(it)
+                        .stream()
+                        .map(sentiment -> sentiment.getSentiment().getHashtag())
+                        .collect(Collectors.toList())))
+                .collect(Collectors.toList());
+    }
 }

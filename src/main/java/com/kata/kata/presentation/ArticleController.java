@@ -1,7 +1,6 @@
 package com.kata.kata.presentation;
 
 import com.kata.kata.application.ArticleService;
-import com.kata.kata.application.dto.ArticleKeywordResponse;
 import com.kata.kata.application.dto.ArticleResponse;
 import com.kata.kata.application.dto.Response;
 import com.kata.kata.application.dto.Responses;
@@ -22,5 +21,10 @@ public class ArticleController {
     @GetMapping("/{articleId}")
     public ResponseEntity<Response<ArticleResponse>> findArticle(@PathVariable("articleId") Long id) {
         return ResponseEntity.ok(Response.of(articleService.findArticle(id)));
+    }
+
+    @GetMapping
+    public ResponseEntity<Responses<ArticleResponse>> findAllArticle() {
+        return ResponseEntity.ok(Responses.of(articleService.findAllArticle()));
     }
 }
