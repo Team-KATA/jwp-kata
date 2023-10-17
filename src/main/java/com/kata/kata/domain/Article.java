@@ -1,5 +1,6 @@
 package com.kata.kata.domain;
 
+import com.kata.kata.fixture.DayFixture;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -61,5 +62,9 @@ public class Article {
             LocalDateTime time
     ) {
         this(null, title, body, reporter, press, link, time);
+    }
+
+    public boolean isNotExpired(LocalDateTime standard) {
+        return time.isAfter(standard.minusDays(DayFixture.ONE_DAY));
     }
 }

@@ -31,6 +31,7 @@ public class ArticleService {
         return ArticleResponse.of(articleSummaryRepository.findByArticle(article), sentiments);
     }
 
+    @Transactional(readOnly = true)
     public List<ArticleResponse> findAllArticle() {
         List<Article> articles = articleRepository.findAll();
         return articles.stream()
