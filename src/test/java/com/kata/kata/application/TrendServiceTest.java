@@ -1,9 +1,10 @@
 package com.kata.kata.application;
 
-import com.kata.kata.application.dto.TrendKeywordResponse;
+import com.kata.kata.application.dto.*;
 import com.kata.kata.domain.*;
 import com.kata.kata.domain.repository.*;
 import com.kata.kata.fixture.DayFixture;
+import com.kata.kata.fixture.HitsFixture;
 import com.kata.kata.support.ApplicationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class TrendServiceTest {
     @Autowired
     private TrendKeywordRepository trendKeywordRepository;
     @Autowired
+    private TrendOpinionRepository trendOpinionRepository;
+    @Autowired
     private KeywordRepository keywordRepository;
     @Autowired
     private ArticleRepository articleRepository;
@@ -38,6 +41,28 @@ public class TrendServiceTest {
         articleKeywordRepository.save(new ArticleKeyword(article, keyword));
 
         List<TrendKeywordResponse> responses = trendService.findTrendKeywords(trend.getTime()).getKeywords();
+
+        assertThat(responses).hasSize(1);
+    }
+
+    @Test
+    void findTrendOpinions() {
+        Trend trend = trendRepository.save(new Trend(LocalDateTime.now()));
+        TrendOpinion trendOpinion = new TrendOpinion(trend, (float) 20, HitsFixture.HUNDRED_HITS);
+        trendOpinionRepository.save(trendOpinion);
+
+        List<TrendOpinionResponse> responses = trendService.findTrendOpinions(trend.getTime()).getData();
+
+        assertThat(responses).hasSize(1);
+    }
+
+    @Test
+    void findTrendHits() {
+        Trend trend = trendRepository.save(new Trend(LocalDateTime.now()));
+        TrendOpinion trendOpinion = new TrendOpinion(trend, (float) 20, HitsFixture.HUNDRED_HITS);
+        trendOpinionRepository.save(trendOpinion);
+
+        List<TrendHitsResponse> responses = trendService.findTrendHits(trend.getTime()).getData();
 
         assertThat(responses).hasSize(1);
     }
