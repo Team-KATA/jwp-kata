@@ -1,6 +1,7 @@
 package com.kata.kata.presentation;
 
 import com.kata.kata.application.TrendService;
+import com.kata.kata.application.dto.TrendHitsResponses;
 import com.kata.kata.application.dto.TrendKeywordResponses;
 import com.kata.kata.application.dto.TrendOpinionResponses;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,10 @@ public class TrendController {
     @GetMapping("/opinions")
     public ResponseEntity<TrendOpinionResponses> findOpinionsByTrend(@RequestParam("time") LocalDateTime time) {
         return ResponseEntity.ok(trendService.findTrendOpinions(time));
+    }
+
+    @GetMapping("/hits")
+    public ResponseEntity<TrendHitsResponses> findHitsByTrend(@RequestParam("time") LocalDateTime time) {
+        return ResponseEntity.ok(trendService.findTrendHits(time));
     }
 }

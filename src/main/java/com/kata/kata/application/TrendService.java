@@ -1,9 +1,6 @@
 package com.kata.kata.application;
 
-import com.kata.kata.application.dto.TrendKeywordResponse;
-import com.kata.kata.application.dto.TrendKeywordResponses;
-import com.kata.kata.application.dto.TrendOpinionResponse;
-import com.kata.kata.application.dto.TrendOpinionResponses;
+import com.kata.kata.application.dto.*;
 import com.kata.kata.domain.Trend;
 import com.kata.kata.domain.TrendKeyword;
 import com.kata.kata.domain.TrendOpinion;
@@ -43,6 +40,15 @@ public class TrendService {
         List<TrendOpinion> trendOpinions = trendOpinionRepository.findByTrend(trend);
         return TrendOpinionResponses.of(trend, trendOpinions.stream()
                 .map(TrendOpinionResponse::of)
+                .collect(Collectors.toList()));
+    }
+
+    @Transactional(readOnly = true)
+    public TrendHitsResponses findTrendHits(LocalDateTime time) {
+        Trend trend = trendRepository.findByTime(time);
+        List<TrendOpinion> trendOpinions = trendOpinionRepository.findByTrend(trend);
+        return TrendHitsResponses.of(trend, trendOpinions.stream()
+                .map(TrendHitsResponse::of)
                 .collect(Collectors.toList()));
     }
 }
