@@ -1,6 +1,7 @@
 package com.kata.kata.application;
 
 import com.kata.kata.application.dto.TrendKeywordResponse;
+import com.kata.kata.application.dto.TrendKeywordResponses;
 import com.kata.kata.domain.*;
 import com.kata.kata.domain.repository.*;
 import com.kata.kata.fixture.DayFixture;
@@ -37,7 +38,7 @@ public class TrendServiceTest {
         Article article = articleRepository.save(new Article("새벽에 쏜 순항미사일, 백령도 노렸나", "본문", "기자", "언론사", "링크", LocalDateTime.now().minusDays(DayFixture.ONE_DAY)));
         articleKeywordRepository.save(new ArticleKeyword(article, keyword));
 
-        List<TrendKeywordResponse> responses = trendService.findTrendKeywords(trend.getTime());
+        List<TrendKeywordResponse> responses = trendService.findTrendKeywords(trend.getTime()).getKeywords();
 
         assertThat(responses).hasSize(1);
     }
