@@ -37,7 +37,7 @@ public class TrendServiceTest {
         Article article = articleRepository.save(new Article("새벽에 쏜 순항미사일, 백령도 노렸나", "본문", "기자", "언론사", "링크", LocalDateTime.now().minusDays(DayFixture.ONE_DAY)));
         articleKeywordRepository.save(new ArticleKeyword(article, keyword));
 
-        List<TrendKeywordResponse> responses = trendService.findTrendKeywords(trend.getTime()).getKeywords();
+        List<TrendKeywordResponse> responses = trendService.findTrendKeywords(trend.getTime());
 
         assertThat(responses).hasSize(1);
     }
