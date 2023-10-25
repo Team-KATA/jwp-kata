@@ -2,7 +2,8 @@ package com.kata.kata.presentation;
 
 import com.kata.kata.application.KeywordService;
 import com.kata.kata.application.dto.ArticleKeywordResponse;
-import com.kata.kata.application.dto.Response;
+import com.kata.kata.application.dto.CommunityKeywordResponse;
+import com.kata.kata.application.dto.Responses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,12 @@ public class KeywordController {
     private final KeywordService keywordService;
 
     @GetMapping("/{keywordId}/articles")
-    public ResponseEntity<Response<ArticleKeywordResponse>> findArticlesByKeyword(@PathVariable("keywordId") Long id) {
-        return ResponseEntity.ok(Response.of(keywordService.findArticleKeywords(id)));
+    public ResponseEntity<Responses<ArticleKeywordResponse>> findArticlesByKeyword(@PathVariable("keywordId") Long id) {
+        return ResponseEntity.ok(Responses.of(keywordService.findArticleKeywords(id)));
+    }
+
+    @GetMapping("/{keywordId}/sns")
+    public ResponseEntity<Responses<CommunityKeywordResponse>> findCommunitiesByKeyword(@PathVariable("keywordId") Long id) {
+        return ResponseEntity.ok(Responses.of(keywordService.findCommunitiesByKeyword(id)));
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,7 +25,7 @@ public class Trend {
             LocalDateTime time
     ) {
         this.id = id;
-        this.time = time;
+        this.time = time.truncatedTo(ChronoUnit.SECONDS);
     }
 
     public Trend(

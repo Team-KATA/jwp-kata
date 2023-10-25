@@ -31,4 +31,11 @@ public class ArticleSummary {
         this.article = article;
         this.body = body;
     }
+
+    public ArticleSummary(
+            Article article,
+            String body
+    ) {
+        this(null, article, body);
+    }
 }
