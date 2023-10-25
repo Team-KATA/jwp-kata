@@ -1,10 +1,11 @@
 package com.kata.kata.domain.repository;
 
-import com.kata.kata.domain.Trend;
 import com.kata.kata.domain.TrendOpinion;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TrendOpinionRepository extends JpaRepository<TrendOpinion, Long> {
@@ -13,5 +14,6 @@ public interface TrendOpinionRepository extends JpaRepository<TrendOpinion, Long
         return findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    List<TrendOpinion> findByTrend(Trend trend);
+    @Query("select t from TrendOpinion t where t.trend.time >= :time")
+    List<TrendOpinion> findALLByTime(LocalDateTime time);
 }
