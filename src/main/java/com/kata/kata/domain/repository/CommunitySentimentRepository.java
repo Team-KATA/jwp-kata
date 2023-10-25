@@ -10,7 +10,7 @@ import java.util.List;
 public interface CommunitySentimentRepository extends JpaRepository<CommunitySentiment, Long> {
 
     List<CommunitySentiment> findAllByCommunity(Community community);
-
+  
     default CommunitySentiment get(Long id) {
         return findById(id).orElseThrow(EntityNotFoundException::new);
     }

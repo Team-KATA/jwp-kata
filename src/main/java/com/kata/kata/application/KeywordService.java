@@ -24,6 +24,7 @@ public class KeywordService {
     private final CommunityKeywordRepository communityKeywordRepository;
     private final CommunitySentimentRepository communitySentimentRepository;
 
+
     @Transactional(readOnly = true)
     public List<ArticleKeywordResponse> findArticleKeywords(Long id) {
         Keyword keyword = keywordRepository.get(id);

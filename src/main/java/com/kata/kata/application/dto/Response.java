@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 public class Response<T> {
 
-
     private T data;
 
     public Response(

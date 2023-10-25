@@ -5,7 +5,6 @@ import com.kata.kata.domain.TrendKeyword;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 public interface TrendKeywordRepository extends JpaRepository<TrendKeyword, Long> {
 

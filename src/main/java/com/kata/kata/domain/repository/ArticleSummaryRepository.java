@@ -9,7 +9,7 @@ import javax.persistence.EntityNotFoundException;
 public interface ArticleSummaryRepository extends JpaRepository<ArticleSummary, Long> {
 
     ArticleSummary findByArticle(Article article);
-
+  
     default ArticleSummary get(Long id) {
         return findById(id).orElseThrow(EntityNotFoundException::new);
     }
